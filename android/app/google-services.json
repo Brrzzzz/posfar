@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593892671955",
+    "project_id": "pos-farmacia-16ed3",
+    "storage_bucket": "pos-farmacia-16ed3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593892671955:android:dc76d56917a22df8b92f26",
+        "android_client_info": {
+          "package_name": "com.example.pos_farmacia_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN610L7b8Lkq9WzHhl52JNy3qomJ9kSZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
