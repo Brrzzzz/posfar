@@ -1,14 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// La clase LineaVenta define cómo manejamos los productos en el carrito de la pantalla del POS.
-// La movemos aquí para tener todos los modelos relacionados con ventas en un solo lugar.
-class LineaVenta {
-  final dynamic producto; // Usamos dynamic para evitar dependencias circulares complejas por ahora
-  int cantidad;
-  LineaVenta({required this.producto, this.cantidad = 1});
-}
-
-// La clase Venta define la estructura del documento que se guarda en la colección "ventas"
 class Venta {
   String? id;
   final String folio;
@@ -23,6 +14,12 @@ class Venta {
   final String observaciones;
   final List<ItemVenta> items;
 
+  // --- NUEVOS CAMPOS PARA RECETAS ---
+  final String? medicoId;
+  final String? medicoNombre;
+  final String? recetaFolio;
+
+
   Venta({
     this.id,
     required this.folio,
@@ -36,9 +33,11 @@ class Venta {
     required this.estado,
     required this.observaciones,
     required this.items,
+    this.medicoId,
+    this.medicoNombre,
+    this.recetaFolio,
   });
 
-  // Convierte el objeto Venta a un formato que Firebase puede guardar
   Map<String, dynamic> toMap() {
     return {
       'folio': folio,
@@ -52,33 +51,37 @@ class Venta {
       'estado': estado,
       'observaciones': observaciones,
       'items': items.map((item) => item.toMap()).toList(),
+      // --- AÑADIMOS LOS NUEVOS CAMPOS AL MAPA ---
+      'medicoId': medicoId,
+      'medicoNombre': medicoNombre,
+      'recetaFolio': recetaFolio,
     };
   }
 }
 
-// La clase ItemVenta define la estructura de cada producto dentro de una venta guardada
 class ItemVenta {
   final String productoId;
   final String productoNombre;
   final int cantidad;
   final double precioVenta;
   final String loteVendido;
+  final double descuento;
+  final double importe;
 
   ItemVenta({
     required this.productoId,
     required this.productoNombre,
     required this.cantidad,
     required this.precioVenta,
-    required this.loteVendido, required double importe, required double descuento,
+    required this.loteVendido,
+    required this.descuento,
+    required this.importe,
   });
-
+  
   Map<String, dynamic> toMap() {
     return {
-      'productoId': productoId,
-      'productoNombre': productoNombre,
-      'cantidad': cantidad,
-      'precioVenta': precioVenta,
-      'loteVendido': loteVendido,
+      'productoId': productoId, 'productoNombre': productoNombre, 'cantidad': cantidad,
+      'precioVenta': precioVenta, 'loteVendido': loteVendido, 'descuento': descuento, 'importe': importe,
     };
   }
 }

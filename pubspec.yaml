@@ -41,6 +41,8 @@ dependencies:
   intl: ^0.20.2
   flutter_localizations:
     sdk: flutter
+  window_manager: ^0.5.0
+  dropdown_search: ^6.0.2
 
 dev_dependencies:
   flutter_test:
